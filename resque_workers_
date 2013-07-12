@@ -27,9 +27,9 @@ working = 0
 f       = Net::HTTP.get URI.parse("http://#{ip}:#{port}/stats.txt")
 f.split(' ').each do |l|
   if l =~ /resque.workers=(\d+)/
-    workers = $1.to_i
+    workers = $1.to_f
   elsif l =~ /resque.working=(\d+)/
-    working = $1.to_i
+    working = $1.to_f
   end
 end
 puts "workers.value #{working/workers}"
