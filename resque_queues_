@@ -15,7 +15,7 @@ queues = Array(redis.smembers("resque:queues"))
 
 if config
 
-  puts "graph_title Redis Connections rate"
+  puts "graph_title Resque Connections rate"
   puts "graph_category resque"
   puts "graph_vlabel queue rates/s"
   puts "graph_info This graph monitors the in and out rate of the queues"
