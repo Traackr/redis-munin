@@ -7,7 +7,7 @@ $0 =~ /resque_failed_(\d+_\d+_\d+_\d+)_(\d+)$/
 port = $2
 ip = $1.gsub('_','.')
 
-port = 5678 #unless port
+port = 5678 unless port
 ip = 'localhost' unless ip
 
 if ARGV[0] == "config"
