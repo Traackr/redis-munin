@@ -14,7 +14,7 @@ if ARGV[0] == "config"
   puts "graph_title Resque Workers in use"
   puts "graph_category resque"
   puts "graph_info This graph shows resque workers in use vs. the total"
-  puts "graph_args --lower-limit 0 --upper-limit 100"
+  puts "graph_args --lower-limit 0 --upper-limit 1"
   puts 'graph_vlabel %'
 
   puts 'workers.label workers'
