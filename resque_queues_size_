@@ -10,23 +10,23 @@ ip   = $1.gsub('_', '.')
 port = 5678 unless port
 ip = 'localhost' unless ip
 
+q = Net::HTTP.get URI.parse("http://#{ip}:#{port}/stats.txt")
+
 if ARGV[0] == "config"
   puts "graph_title Resque queue size"
   puts "graph_category resque"
   puts "graph_info This graph shows resque queues size"
-  puts "graph_args --lower-limit 0 --upper-limit 500"
+  puts "graph_args --lower-limit 0"
   puts 'graph_vlabel jobs'
-
-  puts 'queues.label queues'
-  puts 'queues.type GAUGE'
-
-  exit 0
 end
-workers = 1
-working = 0
-f       = Net::HTTP.get URI.parse("http://#{ip}:#{port}/stats.txt")
-f.split(' ').each do |l|
+
+q.split(' ').each do |l|
   if l =~ /queues.(\w+)=(\d+)/
-     puts "queues.#{$1}.value #{$2}"
+     if ARGV[0] == "config"
+       puts "#{$1}.label #{$1}"
+       puts "#{$1}.type GAUGE"
+     else
+       puts "#{$1}.value #{$2}"
+     end
   end
 end
